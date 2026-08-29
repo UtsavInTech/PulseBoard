@@ -1,0 +1,398 @@
+.page {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 40px 32px 64px;
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
+
+.pageHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.pageTitle {
+  font-size: 1.8rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 4px;
+}
+
+.pageSubtitle {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  max-width: 560px;
+  line-height: 1.6;
+}
+
+.spinner {
+  width: 22px;
+  height: 22px;
+  border: 2.5px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+  margin-top: 6px;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.errorBanner {
+  background: rgba(248,113,113,0.1);
+  border: 1px solid rgba(248,113,113,0.3);
+  color: var(--danger);
+  border-radius: var(--radius);
+  padding: 12px 16px;
+  font-size: 0.9rem;
+}
+
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.chartsGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.chartCard {
+  background: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 24px;
+  box-shadow: var(--shadow-sm);
+  transition: border-color var(--transition), box-shadow var(--transition),
+              transform var(--transition);
+}
+
+.chartCard:hover {
+  border-color: rgba(15, 159, 154, 0.4);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.chartHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.chartTitle {
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+  margin-bottom: 3px;
+}
+
+.chartSub {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  max-width: 280px;
+  line-height: 1.4;
+}
+
+.badge {
+  background: var(--bg-input);
+  border: 1px solid var(--border);
+  border-radius: 20px;
+  color: var(--text-secondary);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  white-space: nowrap;
+}
+
+.footer {
+  text-align: center;
+  padding-top: 8px;
+  border-top: 1px solid var(--border);
+  margin-top: 8px;
+}
+
+.footer p {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+/* ─── Responsive ──────────────────────────────────────────────────── */
+@media (max-width: 1100px) {
+  .chartsGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  .kpiGrid { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 560px) {
+  .kpiGrid { grid-template-columns: 1fr; }
+  .page { padding: 24px 16px 44px; }
+  .pageTitle { font-size: 1.4rem; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Role accent. Deliberately narrow: the badge, a hairline on cards, chart
+   marks and hover borders. The dashboard chrome stays neutral.
+   ═══════════════════════════════════════════════════════════════════════ */
+.page[data-role="product_manager"] { --role-accent: #6D4DE6; --role-soft: rgba(109, 77, 230, 0.1); }
+.page[data-role="growth_manager"]  { --role-accent: #16A34A; --role-soft: rgba(22, 163, 74, 0.1); }
+.page[data-role="user_researcher"] { --role-accent: #0F9F9A; --role-soft: rgba(15, 159, 154, 0.1); }
+.page[data-role="executive"]       { --role-accent: #1D4ED8; --role-soft: rgba(29, 78, 216, 0.1); }
+
+.page .chartCard { border-top: 2px solid var(--role-accent, transparent); }
+.page .chartCard:hover { border-color: var(--border); border-top-color: var(--role-accent); }
+
+/* ─── Demo disclosure ──────────────────────────────────────────────────── */
+.demoNotice {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.8125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-left: 3px solid var(--role-accent, var(--border-strong));
+  border-radius: 0 var(--radius) var(--radius) 0;
+  padding: 10px 16px;
+}
+
+.demoTag {
+  font-size: 0.625rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--role-accent, var(--text-secondary));
+  background: var(--role-soft, var(--bg-subtle));
+  border-radius: 100px;
+  padding: 3px 9px;
+  flex-shrink: 0;
+}
+
+/* ─── Role context ─────────────────────────────────────────────────────── */
+.titleRow { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+
+.roleBadge {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--role-accent, var(--teal-600));
+  background: var(--role-soft, var(--teal-50));
+  border-radius: 100px;
+  padding: 5px 12px;
+  white-space: nowrap;
+}
+
+.pageSubtitle strong { color: var(--text-primary); font-weight: 600; }
+
+/* ─── Acquisition / segment bars ───────────────────────────────────────── */
+.segments { display: flex; flex-direction: column; gap: 12px; }
+
+.segment { display: grid; grid-template-columns: 116px 1fr 46px; align-items: center; gap: 12px; }
+
+.segmentLabel { font-size: 0.8125rem; color: var(--text-primary); white-space: nowrap; }
+
+.segmentTrack {
+  display: block;
+  height: 8px;
+  background: var(--bg-subtle);
+  border-radius: 100px;
+  overflow: hidden;
+}
+
+.segmentFill {
+  display: block;
+  height: 100%;
+  background: var(--role-accent, var(--blue-600));
+  border-radius: 100px;
+  transition: width 700ms var(--ease-out);
+}
+
+.segmentValue {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Common paths ─────────────────────────────────────────────────────── */
+.sequences { display: flex; flex-direction: column; }
+
+.sequence {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+}
+.sequence:last-child { border-bottom: none; }
+
+.sequencePath { font-size: 0.8125rem; color: var(--text-primary); text-transform: capitalize; }
+
+.sequenceCount {
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+/* ─── Executive signals ────────────────────────────────────────────────── */
+.insights { list-style: none; display: flex; flex-direction: column; gap: 12px; }
+
+.insight {
+  position: relative;
+  padding-left: 20px;
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-secondary);
+}
+.insight::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 10px;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--border-strong);
+}
+.insight.positive::before { background: var(--green-500); }
+.insight.attention::before { background: #E0A800; }
+.insight.attention { color: var(--text-primary); }
+
+@media (max-width: 640px) {
+  .segment { grid-template-columns: 92px 1fr 40px; gap: 8px; }
+}
+
+/* ═══════════════════════════════════════════════════════════════════════
+   Information architecture: orientation → decisions → evidence → explore
+   ═══════════════════════════════════════════════════════════════════════ */
+
+/* ── "What you can learn here" ─────────────────────────────────────────── */
+.learnStrip {
+  display: flex;
+  align-items: baseline;
+  gap: 22px;
+  flex-wrap: wrap;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 18px 22px;
+}
+
+.learnLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--role-accent, var(--text-secondary));
+  white-space: nowrap;
+}
+
+.learnList {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 28px;
+  flex: 1;
+  min-width: 0;
+}
+
+.learnItem {
+  position: relative;
+  padding-left: 16px;
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.learnItem::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 9px;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: var(--role-accent, var(--border-strong));
+  opacity: 0.55;
+}
+
+/* ── Decision layer ────────────────────────────────────────────────────── */
+.signalGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+
+.emptySignal {
+  font-size: 0.9375rem;
+  line-height: 1.7;
+  color: var(--text-muted);
+  padding: 8px 0;
+}
+
+/* Info trigger sits inline with the card title */
+.chartTitle {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* ── Exploration drawer ────────────────────────────────────────────────── */
+.explore {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: var(--bg-secondary);
+  overflow: visible;
+}
+
+.exploreSummary {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding: 18px 22px;
+  cursor: pointer;
+  list-style: none;
+  transition: background var(--transition);
+}
+.exploreSummary::-webkit-details-marker { display: none; }
+.exploreSummary:hover { background: var(--bg-subtle); }
+
+.exploreSummary::before {
+  content: "▸";
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  transition: transform var(--transition);
+}
+.explore[open] .exploreSummary::before { transform: rotate(90deg); }
+
+.exploreTitle {
+  font-size: 0.9375rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  letter-spacing: -0.01em;
+}
+
+.exploreHint { font-size: 0.8125rem; color: var(--text-muted); margin-left: auto; }
+
+.explore[open] .chartsGrid { padding: 0 22px 22px; }
+
+@media (max-width: 1100px) {
+  .signalGrid { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 640px) {
+  .learnStrip { flex-direction: column; gap: 12px; }
+  .learnList { flex-direction: column; gap: 6px; }
+  .exploreHint { margin-left: 0; width: 100%; }
+}

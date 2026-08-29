@@ -1,0 +1,170 @@
+.wrap {
+  display: grid;
+  grid-template-columns: 0.85fr 1.15fr;
+  gap: 64px;
+  align-items: start;
+}
+
+/* ── Profile ──────────────────────────────────────────────────────────── */
+.profileCard {
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 34px 30px;
+  box-shadow: var(--shadow-sm);
+  position: sticky;
+  top: calc(var(--nav-h-compact) + 24px);
+}
+
+.photoFrame {
+  width: clamp(132px, 46%, 172px);
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background: var(--navy-900);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+  position: relative;
+  box-shadow: var(--shadow-sm);
+}
+
+/* A portrait headshot square-cropped: bias upward so the face sits in the
+   frame rather than being centred on the chest. */
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  display: block;
+}
+
+.photoPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  color: rgba(255,255,255,0.9);
+  text-align: center;
+  padding: 8px;
+}
+
+.photoInitial { font-size: 2.25rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; }
+
+.photoHint {
+  font-size: 0.5625rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.42);
+}
+
+.name {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  color: var(--navy-900);
+}
+
+.role {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-top: 6px;
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+
+.detailList { list-style: none; display: flex; flex-direction: column; gap: 18px; margin-top: 22px; }
+
+.detailLabel {
+  display: block;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 5px;
+}
+
+.detailValue {
+  font-size: 0.9375rem;
+  color: var(--navy-900);
+  word-break: break-word;
+  transition: color var(--transition);
+}
+a.detailValue:hover { color: var(--blue-600); }
+
+/* ── Channels ─────────────────────────────────────────────────────────── */
+.channelIntro { font-size: 1.0625rem; line-height: 1.85; color: var(--text-secondary); max-width: 560px; }
+
+.channels { display: flex; flex-direction: column; gap: 14px; margin-top: 34px; }
+
+.channel {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  background: #fff;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 22px 24px;
+  transition: border-color var(--transition), box-shadow var(--transition),
+              transform var(--transition);
+}
+.channel:hover {
+  border-color: var(--blue-600);
+  box-shadow: var(--shadow);
+  transform: translateY(-2px);
+}
+
+.channelIcon {
+  width: 44px;
+  height: 44px;
+  flex-shrink: 0;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+}
+.iconLinkedin { background: #0A66C2; }
+.iconWhatsapp { background: #16C784; }
+.iconEmail { background: var(--navy-900); }
+
+.channelBody { flex: 1; min-width: 0; }
+
+.channelTitle {
+  display: block;
+  font-size: 1rem;
+  font-weight: 700;
+  color: var(--navy-900);
+  letter-spacing: -0.015em;
+}
+
+.channelMeta { display: block; font-size: 0.875rem; color: var(--text-secondary); margin-top: 3px; word-break: break-word; }
+
+.channelArrow { color: var(--text-muted); font-size: 1.125rem; transition: transform var(--transition), color var(--transition); }
+.channel:hover .channelArrow { transform: translateX(4px); color: var(--blue-600); }
+
+.responseNote {
+  margin-top: 30px;
+  padding: 18px 20px;
+  border-left: 3px solid var(--teal-600);
+  background: var(--bg-secondary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.9375rem;
+  line-height: 1.75;
+  color: var(--text-secondary);
+}
+
+@media (max-width: 980px) {
+  .wrap { grid-template-columns: 1fr; gap: 40px; }
+  .profileCard { position: static; }
+}
+
+@media (max-width: 560px) {
+  .channel { padding: 18px 18px; gap: 14px; }
+  .channelIcon { width: 38px; height: 38px; }
+}

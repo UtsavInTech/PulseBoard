@@ -1,0 +1,94 @@
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  border: 1px solid transparent;
+  border-radius: var(--radius);
+  font-size: 0.9375rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  padding: 12px 22px;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 220ms var(--ease-out), color var(--transition),
+              border-color var(--transition), box-shadow 220ms var(--ease-out),
+              transform 220ms var(--ease-out);
+}
+
+.btn:hover { text-decoration: none; }
+.btn:active { transform: translateY(0); }
+
+/* ── Variants ─────────────────────────────────────────────────────────── */
+.primary {
+  background: var(--green-500);
+  color: #06301F;
+  box-shadow: 0 1px 2px rgba(6, 48, 31, 0.16);
+}
+.primary:hover {
+  background: var(--green-600);
+  color: #06301F;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 22px var(--green-glow);
+}
+
+.secondary {
+  background: #fff;
+  color: var(--navy-900);
+  border-color: var(--border-strong);
+}
+.secondary:hover {
+  border-color: var(--green-500);
+  color: var(--navy-900);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow);
+}
+
+.navy {
+  background: var(--navy-900);
+  color: #fff;
+}
+.navy:hover {
+  background: var(--navy-800);
+  color: #fff;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: var(--shadow);
+}
+
+.onDark {
+  background: var(--green-500);
+  color: #06301F;
+}
+.onDark:hover {
+  background: var(--green-600);
+  color: #06301F;
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 10px 26px var(--green-glow);
+}
+
+.ghostOnDark {
+  background: transparent;
+  color: #fff;
+  border-color: rgba(255,255,255,0.28);
+}
+.ghostOnDark:hover {
+  background: rgba(255,255,255,0.09);
+  color: #fff;
+  border-color: rgba(94,234,212,0.55);
+  transform: translateY(-2px) scale(1.02);
+}
+
+/* ── Sizes ────────────────────────────────────────────────────────────── */
+.sm { padding: 8px 16px; font-size: 0.875rem; }
+.lg { padding: 14px 28px; font-size: 1rem; }
+
+.block { width: 100%; }
+
+.arrow {
+  transition: transform 220ms var(--ease-out);
+}
+.btn:hover .arrow { transform: translateX(3px); }
+
+@media (prefers-reduced-motion: reduce) {
+  .btn:hover { transform: none; }
+}

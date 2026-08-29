@@ -1,0 +1,104 @@
+.narrative { max-width: 760px; }
+.narrative p { font-size: 1.0625rem; line-height: 1.85; color: var(--text-secondary); }
+.narrative p + p { margin-top: 22px; }
+
+.pillar {
+  position: relative;
+  padding-top: 28px;
+  border-top: 2px solid var(--navy-900);
+}
+.pillar:nth-child(2) { border-top-color: var(--blue-600); }
+.pillar:nth-child(3) { border-top-color: var(--teal-600); }
+
+.pillarNum {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.pillarTitle {
+  font-size: 1.375rem;
+  font-weight: 700;
+  letter-spacing: -0.025em;
+  margin: 12px 0 12px;
+}
+
+.pillarText { font-size: 0.9375rem; line-height: 1.8; color: var(--text-secondary); }
+
+/* ── Roadmap stages ───────────────────────────────────────────────────── */
+.stages { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+
+.stage {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  padding: 28px 26px;
+  transition: border-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+}
+.stage:hover { border-color: var(--border-strong); transform: translateY(-3px); box-shadow: var(--shadow); }
+
+.stageTag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  padding: 6px 12px;
+  border-radius: 100px;
+  margin-bottom: 22px;
+}
+
+.tagToday { background: var(--teal-50); color: var(--teal-600); }
+.tagNext { background: var(--blue-50); color: var(--blue-600); }
+.tagLong { background: var(--bg-subtle); color: var(--text-secondary); }
+
+.stageList { list-style: none; display: flex; flex-direction: column; }
+
+.stageItem {
+  font-size: 0.9375rem;
+  color: var(--text-primary);
+  padding: 12px 0;
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.stageItem:last-child { border-bottom: none; }
+
+.stageDot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: var(--teal-600);
+  flex-shrink: 0;
+}
+.stageNext .stageDot { background: var(--blue-600); }
+.stageLong .stageDot { background: var(--text-muted); }
+
+.stageArrowRow {
+  display: flex;
+  justify-content: center;
+  color: var(--border-strong);
+  font-size: 1.125rem;
+  padding: 4px 0;
+}
+
+.currentNote {
+  margin-top: 44px;
+  padding: 22px 24px;
+  border-left: 3px solid var(--teal-600);
+  background: var(--bg-secondary);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: var(--text-secondary);
+  max-width: 820px;
+}
+
+@media (max-width: 900px) {
+  .stages { grid-template-columns: 1fr; }
+}

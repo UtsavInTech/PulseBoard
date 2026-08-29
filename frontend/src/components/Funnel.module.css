@@ -1,0 +1,56 @@
+.funnel { display: flex; flex-direction: column; gap: 10px; }
+
+.step { display: grid; grid-template-columns: 150px 1fr 88px; align-items: center; gap: 14px; }
+
+.label {
+  font-size: 0.8125rem;
+  color: var(--text-primary);
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.track {
+  display: block;
+  height: 30px;
+  background: var(--bg-subtle);
+  border-radius: var(--radius-sm);
+  overflow: hidden;
+  position: relative;
+}
+
+.fill {
+  display: block;
+  height: 100%;
+  border-radius: var(--radius-sm);
+  background: var(--navy-800);
+  width: 0;
+  animation: funnelGrow 800ms cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+@keyframes funnelGrow { to { width: var(--w); } }
+
+.fillValue {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: #fff;
+  font-variant-numeric: tabular-nums;
+  mix-blend-mode: difference;
+}
+
+.meta { text-align: right; font-variant-numeric: tabular-nums; }
+
+.conversion { font-size: 0.8125rem; font-weight: 700; color: var(--navy-900); display: block; }
+
+.drop { font-size: 0.6875rem; color: var(--danger); display: block; margin-top: 2px; }
+.dropNone { font-size: 0.6875rem; color: var(--text-muted); display: block; margin-top: 2px; }
+
+@media (max-width: 640px) {
+  .step { grid-template-columns: 96px 1fr 62px; gap: 10px; }
+  .label { font-size: 0.75rem; }
+}

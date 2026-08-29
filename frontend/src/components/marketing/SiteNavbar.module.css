@@ -1,0 +1,215 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   Floating island navbar — a rounded panel inset from the viewport edges,
+   sitting over the hero. Stays dark in both states so link colours never
+   flip; on scroll it solidifies, lifts and compacts.
+   ═══════════════════════════════════════════════════════════════════════════ */
+
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 200;
+  padding: var(--nav-gap) 24px 0;
+  pointer-events: none; /* only the island itself is interactive */
+}
+
+/* Top of page: transparent over the dark hero, white text.
+   On scroll: white glass panel, navy text, soft shadow. */
+.island {
+  pointer-events: auto;
+  max-width: var(--container);
+  height: var(--nav-island-h);
+  margin: 0 auto;
+  padding: 0 12px 0 22px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  border-radius: 14px;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: height 260ms var(--ease-out), background 260ms var(--ease-out),
+              border-color 260ms var(--ease-out), box-shadow 260ms var(--ease-out),
+              backdrop-filter 260ms var(--ease-out);
+}
+
+.solid .island {
+  height: var(--nav-island-h-compact);
+  background: rgba(255, 255, 255, 0.92);
+  border-color: var(--border);
+  box-shadow: 0 8px 28px rgba(16, 32, 51, 0.1);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+}
+
+.brand {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: opacity var(--transition);
+}
+.brand:hover { opacity: 0.82; }
+
+/* ── Links ────────────────────────────────────────────────────────────── */
+.links {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 auto;
+}
+
+.link {
+  position: relative;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.8);
+  padding: 9px 18px;
+  border-radius: 9px;
+  border: 1px solid transparent;
+  transition: color var(--transition), background var(--transition),
+              border-color var(--transition);
+}
+.link:hover { color: #fff; background: rgba(255, 255, 255, 0.08); }
+
+.solid .link { color: var(--text-secondary); }
+.solid .link:hover { color: var(--navy-900); background: var(--bg-subtle); }
+
+.linkActive,
+.solid .linkActive { color: var(--green-500); }
+
+.linkActive {
+  border-color: rgba(22, 199, 132, 0.5);
+  background: rgba(22, 199, 132, 0.1);
+}
+.linkActive:hover { background: rgba(22, 199, 132, 0.16); color: var(--green-500); }
+
+.solid .linkActive {
+  border-color: rgba(22, 199, 132, 0.45);
+  background: rgba(22, 199, 132, 0.08);
+}
+.solid .linkActive:hover { color: var(--green-600); }
+
+/* Signal dot resting on the active pill's lower edge */
+.linkActive::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: -3px;
+  width: 5px;
+  height: 5px;
+  margin-left: -2.5px;
+  border-radius: 50%;
+  background: var(--green-500);
+}
+
+.right {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-shrink: 0;
+}
+
+/* ── Burger ───────────────────────────────────────────────────────────── */
+.burger {
+  display: none;
+  width: 40px;
+  height: 40px;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 9px;
+  cursor: pointer;
+  color: #fff;
+  transition: background var(--transition), border-color var(--transition),
+              color var(--transition);
+}
+.burger:hover { background: rgba(255, 255, 255, 0.14); }
+
+.solid .burger {
+  background: var(--bg-subtle);
+  border-color: var(--border);
+  color: var(--navy-900);
+}
+.solid .burger:hover { border-color: var(--border-strong); }
+
+.burgerBox { position: relative; width: 18px; height: 12px; }
+.burgerBar {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  border-radius: 2px;
+  background: currentColor;
+  transition: transform var(--transition), opacity var(--transition), top var(--transition);
+}
+.burgerBar:nth-child(1) { top: 0; }
+.burgerBar:nth-child(2) { top: 5px; }
+.burgerBar:nth-child(3) { top: 10px; }
+
+.burgerOpen .burgerBar:nth-child(1) { top: 5px; transform: rotate(45deg); }
+.burgerOpen .burgerBar:nth-child(2) { opacity: 0; }
+.burgerOpen .burgerBar:nth-child(3) { top: 5px; transform: rotate(-45deg); }
+
+/* ── Mobile panel — a second island below the bar ─────────────────────── */
+.mobilePanel {
+  position: fixed;
+  top: calc(var(--nav-gap) + var(--nav-island-h-compact) + 10px);
+  left: 0;
+  right: 0;
+  z-index: 199;
+  padding: 0 24px;
+  opacity: 0;
+  transform: translateY(-10px);
+  pointer-events: none;
+  transition: opacity var(--transition), transform var(--transition);
+}
+.mobileOpen { opacity: 1; transform: none; pointer-events: auto; }
+
+.mobileInner {
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 10px 16px 18px;
+  border-radius: 14px;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid var(--border);
+  backdrop-filter: saturate(180%) blur(14px);
+  -webkit-backdrop-filter: saturate(180%) blur(14px);
+  box-shadow: 0 18px 44px rgba(16, 32, 51, 0.16);
+  display: flex;
+  flex-direction: column;
+  max-height: calc(100vh - var(--nav-h) - 32px);
+  overflow-y: auto;
+}
+
+.mobileLink {
+  font-size: 1rem;
+  font-weight: 500;
+  color: var(--text-primary);
+  padding: 15px 8px;
+  border-bottom: 1px solid var(--border);
+  transition: color var(--transition);
+}
+.mobileLink:last-of-type { border-bottom: none; }
+.mobileLink:hover { color: var(--green-600); }
+
+.mobileLinkActive { color: var(--green-500); }
+
+.mobileCta { margin-top: 16px; }
+
+@media (max-width: 940px) {
+  .links { display: none; }
+  .right .desktopCta { display: none; }
+  .burger { display: inline-flex; }
+  .island { height: var(--nav-island-h-compact); padding: 0 10px 0 16px; }
+  .brand { margin-right: auto; }
+}
+
+@media (max-width: 560px) {
+  .nav { padding: 10px 16px 0; }
+  .mobilePanel { padding: 0 16px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .island, .mobilePanel { transition: none; }
+}

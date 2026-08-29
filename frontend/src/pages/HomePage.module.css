@@ -1,0 +1,206 @@
+/* ── Hero ─────────────────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  background: var(--navy-900);
+  color: #fff;
+  padding: calc(var(--nav-h) + 88px) 0 104px;
+  overflow: hidden;
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: radial-gradient(ellipse 80% 60% at 25% 15%, #000 5%, transparent 70%);
+  -webkit-mask-image: radial-gradient(ellipse 80% 60% at 25% 15%, #000 5%, transparent 70%);
+  pointer-events: none;
+}
+
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(48% 58% at 4% 4%, rgba(37, 99, 235, 0.38) 0%, transparent 68%),
+    radial-gradient(46% 60% at 96% 96%, rgba(15, 159, 154, 0.3) 0%, transparent 68%),
+    radial-gradient(30% 40% at 62% 88%, rgba(22, 199, 132, 0.14) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+.heroInner {
+  position: relative;
+  z-index: 1;
+  max-width: var(--container);
+  margin: 0 auto;
+  padding: 0 24px;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.05fr);
+  gap: 64px;
+  align-items: center;
+}
+
+.heroLabel {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: #5EEAD4;
+  margin-bottom: 26px;
+}
+.heroLabel::before {
+  content: "";
+  width: 26px;
+  height: 2px;
+  background: #5EEAD4;
+}
+
+.heroTitle {
+  font-size: clamp(2.125rem, 4.4vw, 3.4rem);
+  font-weight: 700;
+  letter-spacing: -0.04em;
+  line-height: 1.08;
+  color: #fff;
+}
+.heroTitle span { display: block; color: rgba(255,255,255,0.62); }
+
+.heroText {
+  font-size: 1.0625rem;
+  line-height: 1.75;
+  color: rgba(255,255,255,0.7);
+  max-width: 520px;
+  margin-top: 26px;
+}
+
+.heroActions { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 38px; }
+
+.heroMeta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 28px;
+  margin-top: 48px;
+  padding-top: 28px;
+  border-top: 1px solid rgba(255,255,255,0.12);
+}
+
+.metaItem { display: flex; flex-direction: column; gap: 4px; }
+.metaValue { font-size: 1.375rem; font-weight: 700; color: #fff; letter-spacing: -0.02em; }
+.metaItem:hover .metaValue { color: #5EEAD4; transition: color var(--transition); }
+.metaLabel {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+}
+
+.heroVisual { position: relative; }
+
+/* ── Why PulseBoard (split intro) ─────────────────────────────────────── */
+.introSplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.introHeading {
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.25;
+}
+.introHeading span { color: var(--blue-600); }
+
+.introBody { font-size: 1.0625rem; line-height: 1.85; color: var(--text-secondary); }
+.introBody + .introBody { margin-top: 20px; }
+
+/* ── Steps ────────────────────────────────────────────────────────────── */
+.steps {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--border);
+}
+
+.step {
+  padding: 34px 28px 34px 0;
+  border-right: 1px solid var(--border);
+  position: relative;
+}
+.step:last-child { border-right: none; }
+.step::before {
+  content: "";
+  position: absolute;
+  top: -1px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--green-500);
+  transition: width 600ms var(--ease-out);
+}
+.step:hover::before { width: calc(100% - 28px); }
+
+.stepNum {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--teal-600);
+  font-variant-numeric: tabular-nums;
+}
+
+.stepTitle {
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin: 14px 0 12px;
+}
+
+.stepText { font-size: 0.9375rem; line-height: 1.7; color: var(--text-secondary); padding-right: 12px; }
+
+.flowWrap { margin-top: 64px; }
+
+.flowCaption {
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* ── Vision ───────────────────────────────────────────────────────────── */
+.visionNote {
+  font-size: 0.9375rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.6);
+  max-width: 760px;
+  margin: 44px auto 0;
+  text-align: center;
+}
+
+@media (max-width: 1080px) {
+  .heroInner { grid-template-columns: 1fr; gap: 56px; }
+  .heroText { max-width: 640px; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .step { padding-right: 24px; }
+  .step:nth-child(2) { border-right: none; }
+  .step:nth-child(3), .step:nth-child(4) { border-top: 1px solid var(--border); }
+  .introSplit { grid-template-columns: 1fr; gap: 32px; }
+}
+
+@media (max-width: 640px) {
+  .hero { padding: calc(var(--nav-h) + 52px) 0 72px; }
+  .heroActions > * { width: 100%; }
+  .heroMeta { gap: 20px; }
+  .steps { grid-template-columns: 1fr; }
+  .step { border-right: none; border-top: 1px solid var(--border); padding: 28px 0; }
+  .step:first-child { border-top: none; }
+}

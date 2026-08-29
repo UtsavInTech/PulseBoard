@@ -1,0 +1,109 @@
+.whoSplit {
+  display: grid;
+  grid-template-columns: 0.9fr 1.1fr;
+  gap: 72px;
+  align-items: start;
+}
+
+.whoText { font-size: 1.0625rem; line-height: 1.85; color: var(--text-secondary); }
+.whoText + .whoText { margin-top: 20px; }
+
+.exploreCard {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  background: #fff;
+  padding: 30px 28px;
+  height: 100%;
+  transition: border-color var(--transition), transform var(--transition),
+              box-shadow var(--transition);
+}
+.exploreCard:hover {
+  border-color: var(--blue-600);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+}
+
+.exploreIcon {
+  width: 44px;
+  height: 44px;
+  border-radius: var(--radius);
+  background: var(--navy-900);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 22px;
+}
+
+.exploreTitle {
+  font-size: 1.125rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  margin-bottom: 10px;
+}
+
+.exploreText { font-size: 0.9375rem; line-height: 1.7; color: var(--text-secondary); }
+
+/* ── Why build with us ────────────────────────────────────────────────── */
+.whySplit {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+.whyHeading {
+  font-size: clamp(1.625rem, 3vw, 2.25rem);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.2;
+  color: #fff;
+}
+
+.whyText {
+  font-size: 1.0625rem;
+  line-height: 1.8;
+  color: rgba(255,255,255,0.68);
+  margin-top: 22px;
+}
+
+.areaLabel {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.5);
+  margin-bottom: 20px;
+}
+
+.areaGrid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+
+.area {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: rgba(255,255,255,0.04);
+  border-radius: var(--radius);
+  padding: 16px 18px;
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: #fff;
+  transition: background var(--transition), border-color var(--transition),
+              transform var(--transition);
+}
+.area:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.34);
+  transform: translateY(-2px);
+}
+
+.areaDot { width: 6px; height: 6px; border-radius: 50%; background: #5EEAD4; flex-shrink: 0; }
+
+@media (max-width: 980px) {
+  .whoSplit, .whySplit { grid-template-columns: 1fr; gap: 40px; }
+}
+
+@media (max-width: 560px) {
+  .areaGrid { grid-template-columns: 1fr; }
+}

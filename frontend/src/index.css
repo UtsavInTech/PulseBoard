@@ -1,0 +1,157 @@
+/* ═══════════════════════════════════════════════════════════════════════════
+   PulseBoard — Design Tokens
+   Professional navy / blue / teal enterprise system.
+   Token names are kept stable so every existing dashboard component
+   (StatCard, FilterBar, charts) re-skins without structural change.
+   ═══════════════════════════════════════════════════════════════════════════ */
+:root {
+  /* ── Brand ──────────────────────────────────────────────────────────── */
+  --navy-900:      #0B1F33;
+  --navy-800:      #123452;
+  --navy-700:      #1B4670;
+  --blue-600:      #2563EB;
+  --blue-700:      #1D4ED8;
+  --blue-50:       #EFF5FF;
+  --teal-600:      #0F9F9A;
+  --teal-50:       #E8F7F6;
+  --green-500:     #16C784;
+
+  /* ── Surfaces ───────────────────────────────────────────────────────── */
+  --bg-primary:    #F7F9FC;
+  --bg-secondary:  #FFFFFF;
+  --bg-card:       #FFFFFF;
+  --bg-input:      #FFFFFF;
+  --bg-subtle:     #F1F5F9;
+  --bg-dark:       #0B1F33;
+
+  /* ── Lines ──────────────────────────────────────────────────────────── */
+  --border:        #E2E8F0;
+  --border-strong: #CBD5E1;
+  --border-dark:   rgba(255,255,255,0.12);
+
+  /* ── Accents (names retained from the original token set) ───────────── */
+  --accent:        #2563EB;
+  --accent-hover:  #1D4ED8;
+  --accent-glow:   rgba(37,99,235,0.12);
+  --success:       #0F9F9A;
+  --success-alt:   #16C784;
+  /* Green is the action/positive accent: CTAs, active nav, growth metrics */
+  --green-600:     #13B076;
+  --green-glow:    rgba(22,199,132,0.28);
+  --teal-300:      #5EEAD4;
+  --warning:       #B45309;
+  --danger:        #DC2626;
+
+  /* ── Text ───────────────────────────────────────────────────────────── */
+  --text-primary:  #102033;
+  --text-secondary:#64748B;
+  --text-muted:    #94A3B8;
+  --text-inverse:  #FFFFFF;
+  --text-on-dark:  rgba(255,255,255,0.72);
+
+  /* ── Charts ─────────────────────────────────────────────────────────── */
+  --chart-1:       #2563EB;
+  --chart-2:       #0F9F9A;
+  --chart-3:       #16C784;
+  --chart-4:       #123452;
+
+  /* ── Geometry ───────────────────────────────────────────────────────── */
+  --radius-sm:     4px;
+  --radius:        6px;
+  --radius-lg:     10px;
+  --shadow-sm:     0 1px 2px rgba(16,32,51,0.06);
+  --shadow:        0 1px 3px rgba(16,32,51,0.08), 0 6px 16px rgba(16,32,51,0.05);
+  --shadow-lg:     0 12px 32px rgba(16,32,51,0.10), 0 2px 8px rgba(16,32,51,0.05);
+  --transition:    180ms cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0.16, 1, 0.3, 1);
+  --lift:          -4px;
+
+  /* ── Layout ─────────────────────────────────────────────────────────── */
+  --container:     1200px;
+  /* The navbar is a floating island: a rounded panel inset from the top.
+     --nav-h / --nav-h-compact are the TOTAL vertical space it occupies
+     (gap + island), so page heroes can keep offsetting by them. */
+  --nav-gap:            16px;
+  --nav-island-h:       66px;
+  --nav-island-h-compact: 56px;
+  --nav-h:              82px;
+  --nav-h-compact:      72px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html {
+  font-size: 16px;
+  scroll-behavior: smooth;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+  line-height: 1.6;
+  min-height: 100vh;
+  overflow-x: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4 {
+  line-height: 1.15;
+  letter-spacing: -0.025em;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+a { color: var(--accent); text-decoration: none; }
+a:hover { color: var(--accent-hover); }
+
+button, input, select, textarea { font-family: inherit; }
+
+img, svg { max-width: 100%; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+
+/* ─── Scrollbar ─────────────────────────────────────────────────────────── */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg-subtle); }
+::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 99px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-muted); }
+
+/* ─── Utilities ─────────────────────────────────────────────────────────── */
+.sr-only {
+  position: absolute;
+  width: 1px; height: 1px;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  white-space: nowrap;
+}
+
+/* ─── Scroll reveal (see components/Reveal.jsx) ─────────────────────────── */
+[data-reveal] {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 700ms cubic-bezier(0.16, 1, 0.3, 1),
+              transform 700ms cubic-bezier(0.16, 1, 0.3, 1);
+  transition-delay: var(--reveal-delay, 0ms);
+  will-change: opacity, transform;
+}
+[data-reveal="in"] {
+  opacity: 1;
+  transform: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

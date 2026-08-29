@@ -1,0 +1,64 @@
+@keyframes blobDrift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  33%      { transform: translate3d(4%, -6%, 0) scale(1.08); }
+  66%      { transform: translate3d(-5%, 4%, 0) scale(0.95); }
+}
+
+/* Ambient layer: three very low-opacity gradient fields drifting behind the
+   light sections. Dark sections paint opaque navy over it, so it never shows
+   through the hero or the dashboard preview. */
+
+.layer {
+  position: fixed;
+  inset: 0;
+  z-index: -1;
+  overflow: hidden;
+  pointer-events: none;
+  background: var(--bg-primary);
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(90px);
+  will-change: transform;
+  animation: blobDrift linear infinite;
+}
+
+.blob1 {
+  top: -8%;
+  left: -6%;
+  width: 46vw;
+  height: 46vw;
+  background: radial-gradient(circle, rgba(37, 99, 235, 0.13) 0%, transparent 68%);
+  animation-duration: 34s;
+}
+
+.blob2 {
+  top: 34%;
+  right: -12%;
+  width: 52vw;
+  height: 52vw;
+  background: radial-gradient(circle, rgba(15, 159, 154, 0.12) 0%, transparent 68%);
+  animation-duration: 42s;
+  animation-direction: reverse;
+}
+
+.blob3 {
+  bottom: -14%;
+  left: 22%;
+  width: 40vw;
+  height: 40vw;
+  background: radial-gradient(circle, rgba(22, 199, 132, 0.1) 0%, transparent 68%);
+  animation-duration: 38s;
+  animation-delay: -12s;
+}
+
+@media (max-width: 640px) {
+  .blob { filter: blur(64px); }
+  .blob1, .blob2, .blob3 { width: 80vw; height: 80vw; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .blob { animation: none; }
+}

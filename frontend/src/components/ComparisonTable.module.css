@@ -1,0 +1,89 @@
+.table { display: flex; flex-direction: column; }
+
+.head {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 0.8fr 0.9fr;
+  gap: 12px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+.th {
+  font-size: 0.6875rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+}
+.th:not(:first-child) { text-align: right; }
+
+.row {
+  display: grid;
+  grid-template-columns: 1.5fr 0.8fr 0.8fr 0.9fr;
+  gap: 12px;
+  align-items: center;
+  padding: 11px 0;
+  border-bottom: 1px solid var(--border);
+  transition: background var(--transition);
+}
+.row:last-child { border-bottom: none; }
+.row:hover { background: var(--bg-subtle); }
+
+.label {
+  font-size: 0.875rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 0;
+}
+
+.labelText { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+
+.dot { width: 6px; height: 6px; border-radius: 50%; flex-shrink: 0; background: var(--border-strong); }
+.dotPositive { background: var(--green-500); }
+.dotAttention { background: #E0A800; }
+
+.num {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+.rate {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 8px;
+  font-size: 0.875rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  font-variant-numeric: tabular-nums;
+}
+
+.bar {
+  display: block;
+  height: 5px;
+  flex: 1;
+  max-width: 54px;
+  border-radius: 100px;
+  background: var(--bg-subtle);
+  overflow: hidden;
+}
+
+.barFill {
+  display: block;
+  height: 100%;
+  border-radius: 100px;
+  background: var(--role-accent, var(--blue-600));
+  transition: width 700ms var(--ease-out);
+}
+.positive .barFill { background: var(--green-500); }
+.attention .barFill { background: #E0A800; }
+
+@media (max-width: 620px) {
+  .head, .row { grid-template-columns: 1.3fr 0.7fr 0.7fr 0.8fr; gap: 8px; }
+  .label, .num, .rate { font-size: 0.8125rem; }
+  .bar { display: none; }
+}
