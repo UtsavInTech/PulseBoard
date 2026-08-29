@@ -2,6 +2,13 @@ import axios from "axios";
 
 const BASE_URL = import.meta.env.VITE_API_URL || "http://localhost:8000";
 
+/**
+ * The backend's public base URL, for links that must point at the API itself
+ * (Swagger, health). Hardcoding "http://localhost:8000" in components meant
+ * those links were dead in every deployed environment.
+ */
+export const API_BASE_URL = BASE_URL;
+
 export const api = axios.create({
   baseURL: BASE_URL,
   timeout: 15000,

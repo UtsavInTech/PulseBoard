@@ -11,7 +11,7 @@ import DashboardAssistant from "../components/DashboardAssistant";
 import { useAuth } from "../context/AuthContext";
 import { useAnalytics } from "../hooks/useAnalytics";
 import { useFilterState } from "../hooks/useFilterState";
-import { track } from "../api/client";
+import { track, API_BASE_URL } from "../api/client";
 import styles from "./DashboardPage.module.css";
 
 function ChartCard({ title, subtitle, children, badge, info }) {
@@ -328,7 +328,7 @@ export default function DashboardPage() {
       <footer className={styles.footer}>
         <p>
           PulseBoard · {org || "Demo"} · End-user data cached for 60 seconds ·{" "}
-          <a href="http://localhost:8000/docs" target="_blank" rel="noreferrer">
+          <a href={`${API_BASE_URL}/docs`} target="_blank" rel="noreferrer">
             API Docs ↗
           </a>
         </p>

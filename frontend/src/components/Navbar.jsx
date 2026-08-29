@@ -1,6 +1,7 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import { API_BASE_URL } from "../api/client";
 import Logo from "./Logo";
 import styles from "./Navbar.module.css";
 
@@ -118,7 +119,7 @@ export default function Navbar() {
                   </Link>
                 ))}
                 <a
-                  href="http://localhost:8000/docs"
+                  href={`${API_BASE_URL}/docs`}
                   target="_blank"
                   rel="noreferrer"
                   role="menuitem"

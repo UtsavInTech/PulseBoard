@@ -33,6 +33,7 @@ async def lifespan(app: FastAPI):
     Base.metadata.create_all(bind=engine)
     ensure_schema()
     logger.info("Database tables verified/created")
+    logger.info(f"CORS allow-list: {settings.allowed_origins}")
     yield
     logger.info("Application shutdown")
 
@@ -52,7 +53,7 @@ def create_app() -> FastAPI:
     # ── CORS ──────────────────────────────────────────────────────────────────
     app.add_middleware(
         CORSMiddleware,
-        allow_origins=settings.cors_origins,
+        allow_origins=settings.allowed_origins,
         allow_credentials=True,
         allow_methods=["*"],
         allow_headers=["*"],

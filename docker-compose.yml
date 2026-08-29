@@ -50,7 +50,9 @@ services:
       DATABASE_URL: postgresql://${POSTGRES_USER:-postgres}:${POSTGRES_PASSWORD:-postgres}@postgres:5432/${POSTGRES_DB:-analytics_db}
       SECRET_KEY: ${SECRET_KEY:-CHANGE_THIS_IN_PRODUCTION_AT_LEAST_32_CHARS}
       REDIS_URL: redis://redis:6379
-      CORS_ORIGINS: '["http://localhost", "http://localhost:80", "http://localhost:5173", "http://localhost:3000", "http://frontend"]'
+      # Comma-separated or JSON both parse. Keep deployed origins here too so
+      # local Docker mirrors production behaviour.
+      CORS_ORIGINS: "http://localhost,http://localhost:80,http://localhost:5173,http://localhost:3000,http://frontend,https://pulseboard-production-b09e.up.railway.app"
       ENVIRONMENT: production
       # Read from the gitignored .env — never baked into the image
       OPENAI_API_KEY: ${OPENAI_API_KEY:-}

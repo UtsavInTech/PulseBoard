@@ -963,3 +963,90 @@ def test_daily_activity_supports_weekend_questions(demo_org):
     assert "weekend_vs_weekday" in out
     # Distinct users over the window cannot exceed the sum of daily counts.
     assert out["window_totals"]["distinct_users"] <= sum(d["users"] for d in out["days"])
+
+
+# ═══════════════════════════════════════════════════════════════════════════
+#  CORS configuration
+#
+#  A production deploy failed because the deployed frontend's origin was not in
+#  the allow-list: OPTIONS /login returned 400 "Disallowed CORS origin" while
+#  GET /ai/status returned 200, so the backend looked healthy while every
+#  browser call from the real site failed.
+# ═══════════════════════════════════════════════════════════════════════════
+
+def test_cors_origins_accepts_comma_separated_without_crashing(monkeypatch):
+    """
+    pydantic-settings JSON-decodes complex types from the environment, so a
+    List[str] field given "a,b" raises SettingsError and the app dies at boot.
+    The field is a plain string for exactly this reason.
+    """
+    from app.config import Settings
+
+    monkeypatch.setenv("CORS_ORIGINS", "https://a.example.com, https://b.example.com")
+    monkeypatch.delenv("FRONTEND_URL", raising=False)
+    assert Settings().allowed_origins == ["https://a.example.com", "https://b.example.com"]
+
+
+def test_cors_origins_accepts_json_array(monkeypatch):
+    """docker-compose passes a JSON array; that must keep working."""
+    from app.config import Settings
+
+    monkeypatch.setenv("CORS_ORIGINS", '["https://c.example.com","http://localhost"]')
+    monkeypatch.delenv("FRONTEND_URL", raising=False)
+    assert Settings().allowed_origins == ["https://c.example.com", "http://localhost"]
+
+
+def test_cors_origins_strip_trailing_slashes(monkeypatch):
+    """
+    A browser's Origin header never carries a trailing slash, so an allow-list
+    entry of "https://site.com/" would never match anything.
+    """
+    from app.config import Settings
+
+    monkeypatch.setenv("CORS_ORIGINS", "https://site.example.com/")
+    monkeypatch.setenv("FRONTEND_URL", "https://frontend.example.com/")
+    origins = Settings().allowed_origins
+    assert origins == ["https://site.example.com", "https://frontend.example.com"]
+    assert not any(o.endswith("/") for o in origins)
+
+
+def test_frontend_url_is_added_to_the_allow_list(monkeypatch):
+    """FRONTEND_URL lets a host be allowed without editing the code."""
+    from app.config import Settings
+
+    monkeypatch.delenv("CORS_ORIGINS", raising=False)
+    monkeypatch.setenv("FRONTEND_URL", "https://deployed.example.com")
+    assert "https://deployed.example.com" in Settings().allowed_origins
+
+
+def test_default_allow_list_includes_the_deployed_frontend(monkeypatch):
+    """
+    Railway builds the Dockerfile and never reads docker-compose.yml, so with no
+    CORS_ORIGINS set the defaults must already permit the deployed frontend.
+    """
+    from app.config import Settings
+
+    monkeypatch.delenv("CORS_ORIGINS", raising=False)
+    monkeypatch.delenv("FRONTEND_URL", raising=False)
+    origins = Settings().allowed_origins
+    assert any("railway.app" in o for o in origins), origins
+    assert "http://localhost:5173" in origins, "local development must keep working"
+
+
+def test_preflight_succeeds_for_an_allowed_origin_and_fails_otherwise():
+    """End-to-end: the exact request the browser makes before POST /login."""
+    allowed = "http://localhost:5173"
+    resp = client.options("/login", headers={
+        "Origin": allowed,
+        "Access-Control-Request-Method": "POST",
+        "Access-Control-Request-Headers": "content-type",
+    })
+    assert resp.status_code == 200, resp.text
+    assert resp.headers.get("access-control-allow-origin") == allowed
+
+    blocked = client.options("/login", headers={
+        "Origin": "https://evil.example.com",
+        "Access-Control-Request-Method": "POST",
+    })
+    assert blocked.status_code == 400
+    assert "access-control-allow-origin" not in blocked.headers
