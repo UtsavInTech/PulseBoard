@@ -28,6 +28,53 @@ dashboards use, rather than guessing.
 
 ---
 
+## A look at it
+
+**Ask your data a question, get an answer computed from it.** The dashboard
+assistant queries the same analytics engine the charts use, then explains what
+it found — every figure below came from a live tool call, not the model's
+imagination.
+
+![Dashboard AI assistant answering a question about category performance](docs/screenshots/06-dashboard-ai-assistant.png)
+
+**Funnels and segment breakdowns.** Each funnel stage counts users who
+completed it *and* every prior stage. Segments converting well above or below
+the breakdown average are flagged automatically.
+
+![Marketplace funnel beside the category performance table](docs/screenshots/04-funnel-and-category-performance.png)
+
+**The Executive view — the same dataset, a different lens.** Product health in
+four numbers, then what needs attention and what is working, computed from the
+current filters.
+
+![Executive dashboard showing KPIs and computed signals](docs/screenshots/07-dashboard-executive.png)
+
+**Every metric explains itself.** Info popovers answer what a chart shows, how
+it is calculated, why it matters, and give a worked example from the data
+currently on screen.
+
+![Metric explainer popover open over the funnel](docs/screenshots/05-metric-explainer-popover.png)
+
+**The public site has a separate assistant** — grounded in product
+documentation, with no access to analytics data.
+
+![Public website assistant answering a product question](docs/screenshots/02-public-ai-assistant.png)
+
+<details>
+<summary>More screenshots</summary>
+
+**Product Manager dashboard**
+
+![Product Manager dashboard](docs/screenshots/03-dashboard-product-manager.png)
+
+**Landing page**
+
+![PulseBoard landing page](docs/screenshots/01-landing-hero.png)
+
+</details>
+
+---
+
 ## What it does
 
 Most analytics tools hand every team the same dashboard and let them work out
@@ -87,8 +134,11 @@ session_started → homepage_viewed → search → category_viewed → product_v
 ```
 
 with the negative paths that make a funnel realistic: `cart_abandoned`,
-`checkout_abandoned`, `payment_failed`, `order_cancelled`, plus `signup`,
-`onboarding_complete` and `login`.
+`checkout_abandoned`, `payment_failed`, `order_cancelled`, plus `signup` and
+`onboarding_complete` on a user's first session.
+
+A given date range may show fewer than 19 types — `order_cancelled` fires on
+only 5% of purchases, so a short window can miss it entirely.
 
 ### Dimensions
 
@@ -567,6 +617,7 @@ PulseBoard/
 │   │   └── styles/
 │   ├── nginx.conf                # SPA fallback, asset caching
 │   └── Dockerfile
+├── docs/screenshots/             # images used in this README
 ├── docker-compose.yml            # postgres, redis, backend, frontend, seeder
 └── .github/workflows/deploy.yml
 ```
@@ -641,5 +692,4 @@ anomaly detection over the existing event stream · saved reports and alerts.
 [LinkedIn](https://www.linkedin.com/in/utsav-tech/) ·
 utsav.udk@gmail.com
 
-Also see [HelpDesk AI Assistant](https://github.com/UtsavInTech/HelpDesk-Ai-Assistant) —
-a related project exploring AI-assisted support workflows.
+
