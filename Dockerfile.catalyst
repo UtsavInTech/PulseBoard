@@ -1,0 +1,2 @@
+FROM pulseboard-api:catalyst
+COPY --chown=appuser:appgroup frontend/dist /app/static
